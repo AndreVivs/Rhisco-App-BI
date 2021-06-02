@@ -13,9 +13,19 @@ import './AppAnalista.css';
 
 function App() {
 
+<<<<<<< HEAD
+  const [showAssets, setshowAssets] = useState(true)
+  const [showRegions, setshowRegions] = useState(false)
+  const [showSector, setshowSector] = useState(false)
+  const [showBenchmark, setshowBenchmark] = useState(false)
+  const [holdingTable, setHoldingTable] = useState(false)
+  const [historyTable, sethistoryTable] = useState(true)
+  
+=======
   const [renderGraphic, setRenderGraphic] = useState('assetsAllocation')
   const [returnTable, setreturnTable] = useState(false)
   const [historyTable, sethistoryTable] = useState(true)
+>>>>>>> df722d22cae8c269db1699a7cae753e43fe68b9a
 
   const handleChangeHistoryTable = () => {
     sethistoryTable(true)

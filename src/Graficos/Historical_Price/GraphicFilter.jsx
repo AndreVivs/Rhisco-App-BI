@@ -2,31 +2,22 @@ import React, { Fragment, useState, useEffect } from 'react';
 import axios from 'axios'
 import { Line } from 'react-chartjs-2'
 const api = 'https://rhisco-89b36-default-rtdb-4be8b.firebaseio.com/.json'
-
 const options = [
     {
         'years': '2020'
-
     },
     {
         'years': '2019'
-
     },
     {
         'years': '2018'
-
     }
 ]
-
 const GraphicFilter = () => {
-
     const [date, setDate] = useState([]);
     const [close, setClose] = useState([]);
-    const [year, setYear] = useState('');
     const [historicalData, sethistoricalData] = useState();
-
     const data = {
-
         labels: date,
         datasets: [{
 
@@ -37,7 +28,10 @@ const GraphicFilter = () => {
             tension: 0.1
         }]
     };
-
+    const opciones = {
+        responsive: true,
+        animations: false
+      }
     const peticionApi = async () => {
 
         await axios.get(api)
@@ -52,21 +46,14 @@ const GraphicFilter = () => {
     useEffect(() => {
         peticionApi();
     }, [])
-
-    const prueba = (datos, año) => {
-
+    const prueba = (datos, year) => { // ''
         let auxDate = [];
         let auxClose = [];
-
-        const filtrado = datos.filter(date => date.Date.includes(año))
-
-        filtrado.map(item => {
-
+        const filtrado = datos.filter(date => date.Date.includes(year)) // '
+        filtrado.forEach(item => {
             auxDate.push(item.Date)
             auxClose.push(item.Close)
-            return 'filter by year'
         })
-
         setDate(auxDate);
         setClose(auxClose);
     }
@@ -76,7 +63,6 @@ const GraphicFilter = () => {
         setYear(opcion)
         prueba(historicalData, year)
     }
-
     return (
 
         <Fragment>
@@ -87,11 +73,12 @@ const GraphicFilter = () => {
 
                 id="seCategorias"
                 onClick={handleCargarAños}>
+      
                 <option> Select year </option>
 
                 {
-                    options.map((item, i) => (
-                        <option key={'categoria' + i}>{item.years}</option>
+                    options.map((item) => (
+                        <option key={'categoria_' + item.years}>{item.years}</option>
                     ))
                 }
 
@@ -102,5 +89,3 @@ const GraphicFilter = () => {
         </Fragment>
     )
 };
-
-export default GraphicFilter;
